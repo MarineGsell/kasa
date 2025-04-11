@@ -1,0 +1,30 @@
+@mixin background-image {
+    background-image: url('../assets/banner-img.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+$radius-box: 25px;
+
+.banner {
+    @include background-image;
+    height: 223px;
+    width: 100%;
+    border-radius: $radius-box;
+
+    &__overlay {
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        width: 100%;
+        height: 100%;
+        border-radius: $radius-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+
+        &__title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 143%;
+        }
+    }
+}

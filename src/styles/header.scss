@@ -1,0 +1,35 @@
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header {
+    @include flex-row;
+    justify-content: space-between;
+    padding: 40px 100px;
+
+    &__logo {
+        height: 68px;
+        width: auto;
+    }
+
+    &__navbar{
+        @include flex-row;
+        gap: 57px;
+        justify-content: center;
+
+        &__link {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 143%;
+            color: black;
+            width: 100%;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+
+$radius-box: 25px;
+$main-color: #FF6060;
+$color-gradient-start: rgba(255, 255, 255, 0);
+$color-gradient-middle-1: rgba(10, 10, 10, 0);
+$color-gradient-middle-2: rgba(4, 4, 4, 0.41);
+$color-gradient-end: rgba(0, 0, 0, 1);
+@mixin color-gradient {
+    background: linear-gradient(
+        180deg,
+        $color-gradient-start 0%,
+        $color-gradient-middle-1 80%,
+        $color-gradient-middle-2 99%,
+        $color-gradient-end 100%
+    ), $main-color;
+}
+
+main {  
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    color: white;
+}
+.content {
+    width: 100%;
+    background-color: rgba(246, 246, 246, 0.45);
+    border-radius: $radius-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 50px;
+
+    &__card {
+        display: flex;
+        justify-content: left;
+        align-items: end;
+        color: white;
+        text-decoration: none;
+        background-color: $main-color;
+        height: 340px;
+        width: 100%;
+        border-radius: 10px;
+        @include color-gradient;
+
+        &__title {
+            margin: 20px;
+            width: 30%;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 143%;    
+        }
+    }
+}
