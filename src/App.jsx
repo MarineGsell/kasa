@@ -5,6 +5,8 @@ import Rent from './pages/Rent'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
+
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -20,7 +22,7 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: 'location',
+        path: "location/:id",
         element: <Rent />
       }
     ]

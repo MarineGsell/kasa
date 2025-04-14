@@ -1,23 +1,26 @@
 import Banner from "../components/Banner"
 import bannerImg from "../assets/about-banner-img.png"
+import Collapse from "../components/Collapse"
+import { aboutData } from "../data/about.js"
+import "../styles/styles.scss"
+
 
 function About () {
     return (
-        <main>
+        <main className="about">
             <Banner
                 backgroundImage={bannerImg}
             />
-            <section className="content">
-                <div className="content__item">
-                    <div className="content__item__header">
-                        <h2 className="content__item__header__title"></h2>
-                        <div className="content__item__header__toggle"></div>
-                    </div>
-                    <div className="content__item__text">
-
-                    </div>
-                </div>
-            </section>
+            <ul className="about__content">
+                {aboutData.map(({id, title, content}) => (
+                    <li key={id} className="about__content__item">
+                        <Collapse 
+                            title={title} 
+                            content={content} 
+                        />
+                    </li>
+                ))}
+            </ul>
         </main>
     )
 }

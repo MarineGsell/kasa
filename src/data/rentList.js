@@ -1,4 +1,4 @@
-[
+export const rentList = [
     {
       "id": "c67ab8a7",
       "title": "Appartement cosy",
@@ -87,7 +87,7 @@
       ],
       "tags": [
         "Buttes Chaumont",
-        "Laumière",
+        "Lumière",
         "Studio"
       ]
     },
@@ -617,3 +617,5 @@
       ]
     }
   ]
+
+export default rentList;

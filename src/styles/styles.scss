@@ -1,6 +1,330 @@
+// color
+$main-color: #FF6060;
+$grey: rgba(227, 227, 227, 1);
+$grey-light: rgba(246, 246, 246, 0.45);
+// gradient
+$color-gradient-start: rgba(255, 255, 255, 0);
+$color-gradient-middle-1: rgba(10, 10, 10, 0);
+$color-gradient-middle-2: rgba(4, 4, 4, 0.41);
+$color-gradient-end: rgba(0, 0, 0, 1);
+@mixin color-gradient {
+    background: linear-gradient(
+        180deg,
+        $color-gradient-start 0%,
+        $color-gradient-middle-1 33%,
+        $color-gradient-middle-2 66%,
+        $color-gradient-end 100%
+    );
+}
+
+// radius
+$radius-box: 25px;
+$radius-card: 10px;
+$radius-rounded: 50%;
+
+// padding/margin
+$margin-main: 50px 100px;
+$gap-main: 50px;
+
+// font
+@mixin font ($size, $weight){
+    font-family: 'monsterat', sans-serif;
+    line-height: 143%;
+    font-size: $size;
+    font-weight: $weight;
+}
+
+// flexbox
+@mixin flex ($direction, $justify, $align, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+// background
+@mixin background-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+// Global styles
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'monsterat', sans-serif;
+}
+
+// Components
+.header {
+    @include flex (row, space-between, center, 0);
+    margin: $margin-main;
+
+    &__logo {
+        height: 68px;
+        width: auto;
+    }
+
+    &__navbar{
+        @include flex (row, center, center, 57px);
+
+        &__link {
+            @include font(24px, 500);
+            text-decoration: none;
+            color: black;
+            width: 100%;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+.footer {
+    @include flex (column, center, center, 24px);
+    background-color: black;
+    color: white;
+    height: 209px;
+}
+.banner {
+    @include background-image;
+    height: 223px;
+    width: 100%;
+    border-radius: $radius-box;
+
+    &__overlay {
+        @include flex(column, center ,center ,0);
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        width: 100%;
+        height: 100%;
+        border-radius: $radius-box;
+
+        &__title {
+            @include font(48px, 700);
+        }
+    }
+}
+.collapse {
+    @include flex (column, normal, normal, 0);
+
+    &__title {
+        background-color: $main-color;
+        color: white;
+        @include flex (row, space-between, center, 0);
+        padding: 10px 20px;
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+
+        &__text {
+            @include font(18px, 700);
+        }
+        &__icon {
+            @include flex (row, center, center, 0);
+            height: 32px;
+            width: 32px;
+            fill: currentColor;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    &__content {
+        background-color: $grey-light;
+        border-radius: 10px 10px 5px 5px;
+
+        &__text {
+            @include font(18px, 400);
+            padding: 20px;            
+        }
+    }
+}
+.slideshow {
+    @include background-image;
+    height: 415px;
+    width: 100%;
+    border-radius: $radius-box;
+    @include flex (row, space-between, center, 0);
+
+    &__arrow {
+        width: 48px;
+        height: 80px;
+        margin: 20px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+// Pages
+.home {  
+    @include flex (column, center, center, $gap-main);
+    margin: $margin-main;
+    color: white;
+
+    &__content {
+        width: 100%;
+        background-color: rgba(246, 246, 246, 0.45);
+        border-radius: $radius-box;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+        padding: 50px;
+    
+        &__card {
+            height: 340px;
+            width: 100%;
+            border-radius: 10px;
+            @include background-image;
+
+            &__overlay {
+                @include color-gradient;
+                @include flex (row, left, end, 0);
+                width: 100%;
+                height: 100%;
+                border-radius: $radius-card;
+                color: white;
+                text-decoration: none;
+                &hover {
+                    cursor: pointer;
+                }
+    
+                &__title {
+                    @include font(18px, 700);
+                    margin: 20px;
+                    width: 100%;
+                }    
+            }
+        }
+    }
+}
+.rent {
+    @include flex (column, normal, normal, $gap-main);
+    margin: $margin-main;
+
+    &__content {
+        @include flex (column, normal, normal, 30px);
+
+        &__info {
+            @include flex (row, space-between, normal, 0);
+            width: 100%;
+
+            &__left {
+                @include flex (column, start, start, 20px);
+                width: 100%;
+
+                &__text {
+                    &__title {
+                        @include font(36px, 500);
+                        color: $main-color;
+                    }
+                    &__location {
+                        @include font(18px, 500);
+                    }
+                }
+
+                &__tags {
+                    @include flex (row, normal, normal, 20px);
+                    width: 100%;
+                    list-style: none;
+
+                    &__tag {
+                        @include font(14px, 700);
+                        @include flex(row, center, center , 0);
+                        background-color: $main-color;
+                        border-radius: $radius-box;
+                        padding: 3px 40px;
+                        color: white;
+                    }
+                }
+
+            }
+            &__right {
+                @include flex (column, space-between, end, 0);
+                width: 100%;
+
+                &__host {
+                    @include flex (row, end, center, 20px);
+                    &__name {
+                        @include font(18px, 500);
+                        color: $main-color;
+                        text-align: right;
+                        white-space: pre-line;
+                    }
+                    &__picture {
+                        height: 64px;
+                        width: 64px;
+                        border-radius: $radius-rounded;
+                        object-fit: cover;
+                    }
+                }
+                &__rate {
+                    @include flex (row, normal, normal, 0);
+                    list-style: none;
+
+                    &__star {
+                        @include flex (row, center, end, 0);
+                        fill: currentColor;
+                        height: 36px;
+                        width: 36px;
+                     }
+                }
+            }
+        }
+        &__details {
+            @include flex (row, start, start, 76px);
+
+            &__item {
+                flex: 1;
+                @include flex (column, start, normal, 0);
+
+                &__list {
+                    list-style: none;
+                }
+            }
+
+        }
+
+    }
+}
+.about {
+    margin: $margin-main;
+    @include flex (column, center, center, $gap-main);
+
+    &__content {
+        @include flex (column, center, center, 30px);
+        list-style: none;   
+        width: 80%;  
+        
+        &__item {
+            width: 100%;
+        }
+    }
+}
+.notfound {
+    @include flex(column, center, center, 139px);
+    padding-bottom: 139px;
+    &__title {
+        @include font(288px, 700);
+        color: $main-color;
+    }
+    &__text {
+        @include font(36px, 500);
+        color: $main-color;
+    }
+    &__link {
+        @include font(18px, 500);
+        color: black;
+    }
+}
+
+
+// rating
+.star-active {
+    color: $main-color;
+}
+.star-inactive {
+    color: $grey;
 }

@@ -1,6 +1,5 @@
 import logo from '../assets/logo.svg';
 import { NavLink } from 'react-router';
-import '../styles/header.scss';
 
 function Header() {
  return (
