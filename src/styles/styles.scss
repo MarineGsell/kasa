@@ -25,6 +25,8 @@ $radius-rounded: 50%;
 // padding/margin
 $margin-main: 50px 100px;
 $gap-main: 50px;
+$margin-main-mobile: 20px;
+$gap-main-mobile: 20px;
 
 // font
 @mixin font ($size, $weight){
@@ -50,6 +52,14 @@ $gap-main: 50px;
     background-position: center;
 }
 
+// responsive
+@mixin responsive {
+    @media (max-width: 768px) { 
+        @content;
+    }
+}
+
+
 // Global styles
 * {
     margin: 0;
@@ -61,20 +71,36 @@ $gap-main: 50px;
 .header {
     @include flex (row, space-between, center, 0);
     margin: $margin-main;
+    @include responsive {
+        margin: $margin-main-mobile;
+    };
+
 
     &__logo {
         height: 68px;
         width: auto;
+        @include responsive {
+            width: 145px;
+        }
     }
 
     &__navbar{
         @include flex (row, center, center, 57px);
+        @include responsive {
+            gap: 26px;
+        }
 
         &__link {
             @include font(24px, 500);
             text-decoration: none;
             color: black;
             width: 100%;
+            white-space: nowrap;
+            @include responsive {
+                font-size: 12px;
+                text-transform: uppercase;
+                text-align: end;
+            }
             
             &:hover {
                 text-decoration: underline;
@@ -84,11 +110,25 @@ $gap-main: 50px;
 }
 .footer {
     @include flex (column, center, center, 24px);
+    @include font(24px, 500); 
     background-color: black;
     color: white;
     height: 209px;
+    @include responsive {
+        font-size: 12px;
+    }
+
+    &__text {
+        @include responsive {
+            width: 30%;
+            text-align: center;
+        }
+    }
 }
 .banner {
+    @include responsive {
+        height: 111px;
+    };
     @include background-image;
     height: 223px;
     width: 100%;
@@ -99,10 +139,17 @@ $gap-main: 50px;
         background-color: rgba($color: #000000, $alpha: 0.6);
         width: 100%;
         height: 100%;
+        padding: 0 30px;
         border-radius: $radius-box;
+        @include responsive {
+            align-items: start;
+        }
 
         &__title {
             @include font(48px, 700);
+            @include responsive {
+                @include font(24px, 700);
+            };
         }
     }
 }
@@ -120,12 +167,17 @@ $gap-main: 50px;
 
         &__text {
             @include font(18px, 700);
+            @include responsive {
+                font-size: 13px
+            }
         }
         &__icon {
             @include flex (row, center, center, 0);
-            height: 32px;
-            width: 32px;
+            width: 24px;
             fill: currentColor;
+            @include responsive {
+                width: 16px;
+            }
             &:hover {
                 cursor: pointer;
             }
@@ -137,7 +189,10 @@ $gap-main: 50px;
 
         &__text {
             @include font(18px, 400);
-            padding: 20px;            
+            padding: 10px;   
+            @include responsive {
+                font-size: 12px;
+            }         
         }
     }
 }
@@ -147,11 +202,19 @@ $gap-main: 50px;
     width: 100%;
     border-radius: $radius-box;
     @include flex (row, space-between, center, 0);
+    @include responsive {
+        height: 255px;
+        border-radius: $radius-card;
+    }
 
     &__arrow {
         width: 48px;
         height: 80px;
         margin: 20px;
+        @include responsive {
+            height: 20px;
+            width: 12px;
+        }
         &:hover {
             cursor: pointer;
         }
@@ -163,6 +226,10 @@ $gap-main: 50px;
     @include flex (column, center, center, $gap-main);
     margin: $margin-main;
     color: white;
+    @include responsive {
+        margin: $margin-main-mobile;
+        gap: $gap-main-mobile;
+    };
 
     &__content {
         width: 100%;
@@ -172,12 +239,20 @@ $gap-main: 50px;
         grid-template-columns: repeat(3, 1fr);
         gap: 50px;
         padding: 50px;
+        @include responsive {
+            @include flex(column, center, center, $gap-main-mobile);
+            background-color: currentColor;
+            padding: 0;
+        }
     
         &__card {
             height: 340px;
             width: 100%;
             border-radius: 10px;
             @include background-image;
+            @include responsive{
+                height: 255px;
+            }
 
             &__overlay {
                 @include color-gradient;
@@ -193,7 +268,7 @@ $gap-main: 50px;
     
                 &__title {
                     @include font(18px, 700);
-                    margin: 20px;
+                    margin: 10px;
                     width: 100%;
                 }    
             }
@@ -203,25 +278,41 @@ $gap-main: 50px;
 .rent {
     @include flex (column, normal, normal, $gap-main);
     margin: $margin-main;
+    @include responsive {
+        margin: $margin-main-mobile;
+        gap: $gap-main-mobile;
+    }
 
     &__content {
         @include flex (column, normal, normal, 30px);
+        @include responsive {
+            gap: $gap-main-mobile
+        }
 
         &__info {
             @include flex (row, space-between, normal, 0);
             width: 100%;
+            @include responsive {
+                @include flex(column, center, normal, $gap-main-mobile)
+            }
 
             &__left {
-                @include flex (column, start, start, 20px);
+                @include flex (column, start, start, $gap-main-mobile);
                 width: 100%;
 
                 &__text {
                     &__title {
                         @include font(36px, 500);
                         color: $main-color;
+                        @include responsive {
+                            font-size: 18px;
+                        }
                     }
                     &__location {
                         @include font(18px, 500);
+                        @include responsive {
+                            font-size: 14px;
+                        }
                     }
                 }
 
@@ -237,6 +328,10 @@ $gap-main: 50px;
                         border-radius: $radius-box;
                         padding: 3px 40px;
                         color: white;
+                        @include responsive {
+                            font-size: 10px;
+                            padding: 3px 20px;
+                        }
                     }
                 }
 
@@ -244,24 +339,37 @@ $gap-main: 50px;
             &__right {
                 @include flex (column, space-between, end, 0);
                 width: 100%;
+                @include responsive {
+                    @include flex(row-reverse, space-between, center, 0)
+                }
 
                 &__host {
                     @include flex (row, end, center, 20px);
+                    @include responsive {
+                        gap: 10px;
+                    }
                     &__name {
                         @include font(18px, 500);
                         color: $main-color;
                         text-align: right;
                         white-space: pre-line;
+                        @include responsive {
+                            font-size: 12px;
+                        }
                     }
                     &__picture {
                         height: 64px;
                         width: 64px;
                         border-radius: $radius-rounded;
                         object-fit: cover;
+                        @include responsive {
+                            height: 32px;
+                            width: 32px;
+                        }
                     }
                 }
                 &__rate {
-                    @include flex (row, normal, normal, 0);
+                    @include flex (row, center, center, 0);
                     list-style: none;
 
                     &__star {
@@ -269,16 +377,26 @@ $gap-main: 50px;
                         fill: currentColor;
                         height: 36px;
                         width: 36px;
+                        @include responsive {
+                            height: 18px;
+                            width: 18px;
+                        }
                      }
                 }
             }
         }
         &__details {
             @include flex (row, start, start, 76px);
+            @include responsive {
+                @include flex(column, center, center, $gap-main-mobile);
+            }
 
             &__item {
                 flex: 1;
                 @include flex (column, start, normal, 0);
+                @include responsive {
+                    width: 100%;
+                }
 
                 &__list {
                     list-style: none;
@@ -292,11 +410,18 @@ $gap-main: 50px;
 .about {
     margin: $margin-main;
     @include flex (column, center, center, $gap-main);
+    @include responsive {
+        margin: $margin-main-mobile;
+        gap: $gap-main-mobile;
+    }
 
     &__content {
         @include flex (column, center, center, 30px);
         list-style: none;   
-        width: 80%;  
+        width: 80%; 
+        @include responsive {
+            width: 100%;
+        } 
         
         &__item {
             width: 100%;
@@ -306,17 +431,34 @@ $gap-main: 50px;
 .notfound {
     @include flex(column, center, center, 139px);
     padding-bottom: 139px;
+    @include responsive {
+        gap: 113px;
+        padding-bottom: 113px;
+    }
     &__title {
         @include font(288px, 700);
         color: $main-color;
+        @include responsive {
+            font-size: 96px;
+        }
     }
     &__text {
         @include font(36px, 500);
         color: $main-color;
+        text-align: center;
+        width: 80%;
+        @include responsive {
+            font-size: 18px;
+        }
+
     }
     &__link {
         @include font(18px, 500);
         color: black;
+        @include responsive {
+            font-size: 14px;
+        }
+
     }
 }
 

@@ -22,11 +22,16 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "location/:id",
-        element: <Rent />
-      }
+        path: 'location/:id',
+        element: <Rent />,
+        errorElement: <NotFound />,
+      },
     ]
   },
+  {
+    path: '/404',
+    element: <NotFound />
+  }
 ])
 
 function App() {

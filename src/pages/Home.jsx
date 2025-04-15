@@ -14,10 +14,13 @@ function Home () {
             />
             <ul className="home__content">
                 {rentList.map(({title, id, cover}) => (
-                    <li key={id}>
+                    <li 
+                        key={id}
+                        className="home__content__card" 
+                        style={{ backgroundImage: `url(${cover})`}}
+                    >
                         <Card 
                             titleRent={title}
-                            cover={cover}
                             id={id}
                         />
                     </li>

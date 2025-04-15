@@ -6,8 +6,8 @@ function Header() {
     <header className='header'>
         <img className='header__logo' src={logo} alt="Logo" />
         <nav className='header__navbar'>
-            <NavLink className='header__navbar__link' to="/home">Home</NavLink>
-            <NavLink className='header__navbar__link' to="/about">About</NavLink>
+            <NavLink className='header__navbar__link' to="/home">Accueil</NavLink>
+            <NavLink className='header__navbar__link' to="/about">A propos</NavLink>
         </nav>
     </header>
  )

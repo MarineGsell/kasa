@@ -1,17 +1,27 @@
-import Carrousel from "../components/Carrousel.jsx"
+import { useEffect } from "react"
 import Collapse from "../components/Collapse.jsx"
 import Slideshow from "../components/Slideshow.jsx"
 import rentList from "../data/rentList.js"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 function Rent () {
   const {id} = useParams()
   const currentRent = rentList.find(rent => rent.id === id)
   const stars = [1, 2, 3, 4, 5]
-  if (!currentRent) {
-    return <div>Location introuvable</div>
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!currentRent){
+      navigate('/404')
+    }
+  }, [currentRent, navigate])
+
+  if (!currentRent){
+    return null
   }
-  return (
+  
+  return ( 
     <main className="rent">
       <Slideshow 
         picture={currentRent.pictures} 
@@ -39,8 +49,6 @@ function Rent () {
               {stars.map((star, id) => (
                 <li className="rent__content__info__right__rate__star" key={id}>
                   <svg 
-                    width="25" 
-                    height="24" 
                     viewBox="0 0 25 24" 
                     xmlns="http://www.w3.org/2000/svg" 
                     className= {star <= currentRent.rating ? "star-active" : "star-inactive"}>
