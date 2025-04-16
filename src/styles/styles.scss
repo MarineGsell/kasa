@@ -23,10 +23,17 @@ $radius-card: 10px;
 $radius-rounded: 50%;
 
 // padding/margin
-$margin-main: 50px 100px;
+$padding-main: 50px 100px;
+$padding-header: 50px 100px 0 100px;
 $gap-main: 50px;
-$margin-main-mobile: 20px;
+$padding-main-mobile: 20px;
+$padding-header-mobile: 20px 20px 0 20px;
 $gap-main-mobile: 20px;
+@mixin main-desktop ($padding) {
+    margin: auto;
+    max-width: 1440px;
+    padding: $padding;
+}
 
 // font
 @mixin font ($size, $weight){
@@ -53,12 +60,18 @@ $gap-main-mobile: 20px;
 }
 
 // responsive
-@mixin responsive {
-    @media (max-width: 768px) { 
+$breakpoint-mobile: 768px;
+$breakpoint-tablette: 1024px;
+@mixin responsive-mobile {
+    @media (max-width: $breakpoint-mobile) { 
         @content;
     }
 }
-
+@mixin responsive-tablette {
+    @media (max-width: $breakpoint-tablette) {
+        @content;
+    }
+}
 
 // Global styles
 * {
@@ -69,39 +82,34 @@ $gap-main-mobile: 20px;
 
 // Components
 .header {
+    @include main-desktop($padding-header);
     @include flex (row, space-between, center, 0);
-    margin: $margin-main;
-    @include responsive {
-        margin: $margin-main-mobile;
+    @include responsive-mobile {
+        padding: $padding-header-mobile;
     };
-
-
     &__logo {
         height: 68px;
         width: auto;
-        @include responsive {
+        @include responsive-mobile {
             width: 145px;
         }
     }
-
     &__navbar{
         @include flex (row, center, center, 57px);
-        @include responsive {
+        @include responsive-mobile {
             gap: 26px;
         }
-
         &__link {
-            @include font(24px, 500);
             text-decoration: none;
             color: black;
             width: 100%;
             white-space: nowrap;
-            @include responsive {
+            @include font(24px, 500);
+            @include responsive-mobile {
                 font-size: 12px;
                 text-transform: uppercase;
                 text-align: end;
             }
-            
             &:hover {
                 text-decoration: underline;
             }
@@ -109,45 +117,43 @@ $gap-main-mobile: 20px;
     }
 }
 .footer {
-    @include flex (column, center, center, 24px);
-    @include font(24px, 500); 
     background-color: black;
     color: white;
     height: 209px;
-    @include responsive {
+    @include main-desktop(0);
+    @include flex (column, center, center, 24px);
+    @include font(24px, 500); 
+    @include responsive-mobile {
         font-size: 12px;
     }
-
     &__text {
-        @include responsive {
+        @include responsive-mobile {
             width: 30%;
             text-align: center;
         }
     }
 }
 .banner {
-    @include responsive {
-        height: 111px;
-    };
-    @include background-image;
     height: 223px;
     width: 100%;
     border-radius: $radius-box;
-
+    @include background-image;
+    @include responsive-mobile {
+        height: 111px;
+    };
     &__overlay {
-        @include flex(column, center ,center ,0);
         background-color: rgba($color: #000000, $alpha: 0.6);
         width: 100%;
         height: 100%;
         padding: 0 30px;
         border-radius: $radius-box;
-        @include responsive {
+        @include flex(column, center ,center ,0);
+        @include responsive-mobile {
             align-items: start;
         }
-
         &__title {
             @include font(48px, 700);
-            @include responsive {
+            @include responsive-mobile {
                 @include font(24px, 700);
             };
         }
@@ -155,27 +161,25 @@ $gap-main-mobile: 20px;
 }
 .collapse {
     @include flex (column, normal, normal, 0);
-
     &__title {
         background-color: $main-color;
         color: white;
-        @include flex (row, space-between, center, 0);
         padding: 10px 20px;
         border-radius: 5px;
         width: 100%;
         height: 100%;
-
+        @include flex (row, space-between, center, 0);
         &__text {
             @include font(18px, 700);
-            @include responsive {
+            @include responsive-mobile {
                 font-size: 13px
             }
         }
         &__icon {
-            @include flex (row, center, center, 0);
             width: 24px;
             fill: currentColor;
-            @include responsive {
+            @include flex (row, center, center, 0);
+            @include responsive-mobile {
                 width: 16px;
             }
             &:hover {
@@ -186,32 +190,30 @@ $gap-main-mobile: 20px;
     &__content {
         background-color: $grey-light;
         border-radius: 10px 10px 5px 5px;
-
         &__text {
-            @include font(18px, 400);
-            padding: 10px;   
-            @include responsive {
+            padding: 10px;  
+            @include font(18px, 400); 
+            @include responsive-mobile {
                 font-size: 12px;
             }         
         }
     }
 }
 .slideshow {
-    @include background-image;
     height: 415px;
     width: 100%;
     border-radius: $radius-box;
     @include flex (row, space-between, center, 0);
-    @include responsive {
+    @include background-image;
+    @include responsive-mobile {
         height: 255px;
         border-radius: $radius-card;
     }
-
     &__arrow {
         width: 48px;
         height: 80px;
         margin: 20px;
-        @include responsive {
+        @include responsive-mobile {
             height: 20px;
             width: 12px;
         }
@@ -223,14 +225,13 @@ $gap-main-mobile: 20px;
 
 // Pages
 .home {  
-    @include flex (column, center, center, $gap-main);
-    margin: $margin-main;
     color: white;
-    @include responsive {
-        margin: $margin-main-mobile;
+    @include main-desktop($padding-main);
+    @include flex (column, center, center, $gap-main);
+    @include responsive-mobile {
+        padding: $padding-main-mobile;
         gap: $gap-main-mobile;
     };
-
     &__content {
         width: 100%;
         background-color: rgba(246, 246, 246, 0.45);
@@ -239,96 +240,89 @@ $gap-main-mobile: 20px;
         grid-template-columns: repeat(3, 1fr);
         gap: 50px;
         padding: 50px;
-        @include responsive {
-            @include flex(column, center, center, $gap-main-mobile);
+        @include responsive-mobile {
             background-color: currentColor;
             padding: 0;
+            @include flex(column, center, center, $gap-main-mobile);
         }
-    
         &__card {
             height: 340px;
             width: 100%;
             border-radius: 10px;
             @include background-image;
-            @include responsive{
+            @include responsive-mobile{
                 height: 255px;
             }
 
             &__overlay {
-                @include color-gradient;
-                @include flex (row, left, end, 0);
                 width: 100%;
                 height: 100%;
                 border-radius: $radius-card;
                 color: white;
                 text-decoration: none;
+                @include color-gradient;
+                @include flex (row, left, end, 0);
                 &hover {
                     cursor: pointer;
                 }
-    
                 &__title {
-                    @include font(18px, 700);
                     margin: 10px;
                     width: 100%;
+                    @include font(18px, 700);
                 }    
             }
         }
     }
 }
 .rent {
+    @include main-desktop($padding-main);
     @include flex (column, normal, normal, $gap-main);
-    margin: $margin-main;
-    @include responsive {
-        margin: $margin-main-mobile;
+    @include responsive-mobile {
+        padding: $padding-main-mobile;
         gap: $gap-main-mobile;
     }
-
     &__content {
         @include flex (column, normal, normal, 30px);
-        @include responsive {
+        @include responsive-mobile {
             gap: $gap-main-mobile
         }
-
         &__info {
-            @include flex (row, space-between, normal, 0);
             width: 100%;
-            @include responsive {
+            @include flex (row, space-between, normal, 0);
+            @include responsive-tablette {
                 @include flex(column, center, normal, $gap-main-mobile)
             }
-
             &__left {
-                @include flex (column, start, start, $gap-main-mobile);
+                flex: 3;
                 width: 100%;
-
+                @include flex (column, start, start, $gap-main-mobile);
                 &__text {
                     &__title {
-                        @include font(36px, 500);
                         color: $main-color;
-                        @include responsive {
+                        @include font(36px, 500);
+                        @include responsive-mobile {
                             font-size: 18px;
                         }
                     }
                     &__location {
                         @include font(18px, 500);
-                        @include responsive {
+                        @include responsive-mobile {
                             font-size: 14px;
                         }
                     }
                 }
-
                 &__tags {
-                    @include flex (row, normal, normal, 20px);
                     width: 100%;
                     list-style: none;
-
+                    @include flex (row, normal, normal, 20px);
                     &__tag {
-                        @include font(14px, 700);
-                        @include flex(row, center, center , 0);
                         background-color: $main-color;
                         border-radius: $radius-box;
                         padding: 3px 40px;
                         color: white;
-                        @include responsive {
+                        @include font(14px, 700);
+                        @include flex(row, center, center , 0);
+                        @include responsive-mobile {
                             font-size: 10px;
                             padding: 3px 20px;
                         }
@@ -337,23 +331,23 @@ $gap-main-mobile: 20px;
 
             }
             &__right {
-                @include flex (column, space-between, end, 0);
+                flex: 1;
                 width: 100%;
-                @include responsive {
+                @include flex (column, center, end, 20px);
+                @include responsive-tablette {
                     @include flex(row-reverse, space-between, center, 0)
                 }
-
                 &__host {
                     @include flex (row, end, center, 20px);
-                    @include responsive {
+                    @include responsive-mobile {
                         gap: 10px;
                     }
                     &__name {
-                        @include font(18px, 500);
                         color: $main-color;
                         text-align: right;
                         white-space: pre-line;
-                        @include responsive {
+                        @include font(18px, 500);
+                        @include responsive-mobile {
                             font-size: 12px;
                         }
                     }
@@ -362,22 +356,21 @@ $gap-main-mobile: 20px;
                         width: 64px;
                         border-radius: $radius-rounded;
                         object-fit: cover;
-                        @include responsive {
+                        @include responsive-mobile {
                             height: 32px;
                             width: 32px;
                         }
                     }
                 }
                 &__rate {
-                    @include flex (row, center, center, 0);
                     list-style: none;
-
+                    @include flex (row, center, center, 0);
                     &__star {
-                        @include flex (row, center, end, 0);
                         fill: currentColor;
                         height: 36px;
                         width: 36px;
-                        @include responsive {
+                        @include flex (row, center, end, 0);
+                        @include responsive-mobile {
                             height: 18px;
                             width: 18px;
                         }
@@ -387,81 +380,72 @@ $gap-main-mobile: 20px;
         }
         &__details {
             @include flex (row, start, start, 76px);
-            @include responsive {
+            @include responsive-mobile {
                 @include flex(column, center, center, $gap-main-mobile);
             }
-
             &__item {
                 flex: 1;
                 @include flex (column, start, normal, 0);
-                @include responsive {
+                @include responsive-mobile {
                     width: 100%;
                 }
-
                 &__list {
                     list-style: none;
                 }
             }
-
         }
-
     }
 }
 .about {
-    margin: $margin-main;
+    @include main-desktop($padding-main);
     @include flex (column, center, center, $gap-main);
-    @include responsive {
-        margin: $margin-main-mobile;
+    @include responsive-mobile {
+        padding: $padding-main-mobile;
         gap: $gap-main-mobile;
     }
-
     &__content {
-        @include flex (column, center, center, 30px);
         list-style: none;   
         width: 80%; 
-        @include responsive {
+        @include flex (column, center, center, 30px);
+        @include responsive-mobile {
             width: 100%;
         } 
-        
         &__item {
             width: 100%;
         }
     }
 }
 .notfound {
-    @include flex(column, center, center, 139px);
     padding-bottom: 139px;
-    @include responsive {
+    @include flex(column, center, center, 139px);
+    @include responsive-mobile {
         gap: 113px;
         padding-bottom: 113px;
     }
     &__title {
-        @include font(288px, 700);
         color: $main-color;
-        @include responsive {
+        @include font(288px, 700);
+        @include responsive-mobile {
             font-size: 96px;
         }
     }
     &__text {
-        @include font(36px, 500);
         color: $main-color;
         text-align: center;
         width: 80%;
-        @include responsive {
+        @include font(36px, 500);
+        @include responsive-mobile {
             font-size: 18px;
         }
-
     }
     &__link {
-        @include font(18px, 500);
         color: black;
-        @include responsive {
+        @include font(18px, 500);
+        @include responsive-mobile {
             font-size: 14px;
         }
-
     }
 }
-
 
 // rating
 .star-active {
