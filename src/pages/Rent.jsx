@@ -10,16 +10,19 @@ function Rent () {
   const stars = [1, 2, 3, 4, 5]
 
   const navigate = useNavigate()
-
   useEffect(() => {
     if (!currentRent){
       navigate('/404')
     }
-  }, [currentRent, navigate])
+  }, [currentRent, navigate]);
+
+  useEffect(() => {
+    document.title = `${currentRent.title}`
+  }, [currentRent.title]);
 
   if (!currentRent){
     return null
-  }
+  };
   
   return ( 
     <main className="rent">

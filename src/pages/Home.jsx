@@ -4,8 +4,13 @@ import Card from "../components/Card.jsx"
 import { rentList } from "../data/rentList.js"
 import bannerImg from "../assets/home-banner-img.png"
 import "../styles/styles.scss"
+import { useEffect } from "react"
+
 
 function Home () {
+    useEffect(() => {
+        document.title = "Les locations de Kasa"
+    });
     return (
         <main className="home">
             <Banner 

@@ -3,9 +3,13 @@ import bannerImg from "../assets/about-banner-img.png"
 import Collapse from "../components/Collapse"
 import { aboutData } from "../data/about.js"
 import "../styles/styles.scss"
+import { useEffect } from "react"
 
 
 function About () {
+    useEffect(() => {
+        document.title = "A propos de Kasa"
+    })
     return (
         <main className="about">
             <Banner
