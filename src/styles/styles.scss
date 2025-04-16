@@ -203,23 +203,33 @@ $breakpoint-tablette: 1024px;
     height: 415px;
     width: 100%;
     border-radius: $radius-box;
-    @include flex (row, space-between, center, 0);
+    color: white;
+    // @include flex(column, space-between, space-between, 0);
     @include background-image;
     @include responsive-mobile {
         height: 255px;
         border-radius: $radius-card;
     }
-    &__arrow {
-        width: 48px;
-        height: 80px;
-        margin: 20px;
-        @include responsive-mobile {
-            height: 20px;
-            width: 12px;
+    &__arrows {
+        height: 100%;
+        @include flex (row, space-between, center, 0);
+        &__arrow {
+            width: 48px;
+            height: 80px;
+            margin: 20px;
+            @include responsive-mobile {
+                height: 20px;
+                width: 12px;
+            }
+            &:hover {
+                cursor: pointer;
+            }
         }
-        &:hover {
-            cursor: pointer;
-        }
+    }
+    &__text {
+        text-align: center;
+        padding-bottom: 10px;
+        transform: translateY(-100%);
     }
 }
 
