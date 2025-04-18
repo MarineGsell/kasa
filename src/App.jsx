@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { createBrowserRouter, RouterProvider, Link, NavLink, Outlet } from 'react-router'
+import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home'
 import Rent from './pages/Rent'
 import About from './pages/About'
@@ -10,9 +9,13 @@ import Layout from './components/Layout'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div><Layout /></div>,
+    element: <Layout />,
     errorElement: <NotFound />,
     children: [
+      {
+        index: true,
+        element: <Home />
+      },
       {
         path: 'home',
         element: <Home />,
@@ -24,7 +27,6 @@ const router = createBrowserRouter([
       {
         path: 'location/:id',
         element: <Rent />,
-        errorElement: <NotFound />,
       },
     ]
   },

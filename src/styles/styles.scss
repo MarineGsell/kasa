@@ -257,7 +257,6 @@ $breakpoint-tablette: 1024px;
         }
     }
 }
-
 .slideshow {
     height: 415px;
     width: 100%;
@@ -289,6 +288,10 @@ $breakpoint-tablette: 1024px;
         text-align: center;
         padding-bottom: 10px;
         transform: translateY(-100%);
+        @include font(18px, 500);
+        @include responsive-mobile {
+            display: none;
+        }
     }
 }
 
@@ -485,11 +488,11 @@ $breakpoint-tablette: 1024px;
     }
 }
 .notfound {
-    padding-bottom: 139px;
+    padding: 139px 0;
     @include flex(column, center, center, 139px);
     @include responsive-mobile {
         gap: 113px;
-        padding-bottom: 113px;
+        padding: 113px 0;
     }
     &__title {
         color: $main-color;
