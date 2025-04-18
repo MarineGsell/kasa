@@ -16,13 +16,14 @@ function Rent () {
     }
   }, [currentRent, navigate]);
 
+  if (!currentRent){
+    return null
+  };
+
   useEffect(() => {
     document.title = `${currentRent.title}`
   }, [currentRent.title]);
 
-  if (!currentRent){
-    return null
-  };
   
   return ( 
     <main className="rent">

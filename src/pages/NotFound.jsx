@@ -1,10 +1,11 @@
 import { Link } from "react-router";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 function NotFound() {
   useEffect(() => {
-      document.title = "Les locations de Kasa"
+      document.title = "Erreur"
   });
   
   return (
