@@ -3,6 +3,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function NotFound() {
+  useEffect(() => {
+      document.title = "Les locations de Kasa"
+  });
+  
   return (
     <>
       <Header />
